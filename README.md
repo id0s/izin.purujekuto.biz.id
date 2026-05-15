@@ -1,61 +1,77 @@
-# CodeIgniter 4 Framework
+# 🏫 E-Izin Sekolah - Sistem Manajemen Perizinan Siswa
 
-## What is CodeIgniter?
+![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![CodeIgniter](https://img.shields.io/badge/CodeIgniter-4.x-EF4223?style=for-the-badge&logo=codeigniter&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+E-Izin adalah aplikasi berbasis web yang dirancang untuk mendigitalisasi proses perizinan siswa keluar kelas atau lingkungan sekolah. Dibangun dengan framework **CodeIgniter 4**, aplikasi ini memangkas birokrasi kertas manual menjadi sistem elektronik yang cepat, transparan, dan aman dilengkapi dengan verifikasi QR Code.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## ✨ Fitur Unggulan
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Aplikasi ini mendukung *Multi-Role* dengan fungsi spesifik untuk masing-masing pengguna:
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 🧑‍🎓 Panel Siswa
+* **Pengajuan Mandiri:** Siswa dapat mengajukan izin dengan mengisi alasan dan jam keluar.
+* **Tracking Status Real-time:** Memantau status izin apakah masih menunggu, disetujui, atau ditolak oleh guru.
+* **Cetak Surat Otomatis (PDF):** Jika disetujui, siswa dapat mencetak surat izin dalam format PDF.
+* **Keamanan QR Code:** Surat PDF dilengkapi QR Code unik untuk mencegah pemalsuan.
 
-## Important Change with index.php
+### 👨‍🏫 Panel Guru / Pengajar
+* **Approval System:** Guru dapat mengeksekusi (Setujui/Tolak) pengajuan izin siswa dengan satu klik.
+* **Rekapitulasi DataTables:** Daftar riwayat perizinan yang rapi dengan fitur pencarian (*search*), filter, dan *pagination* yang responsif.
+* **Digital Footprint:** Nama guru yang menyetujui akan terekam dan tercetak otomatis di surat siswa.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+### 👮‍♂️ Panel Validasi (Satpam/Gerbang)
+* **Scan & Go:** Petugas keamanan gerbang cukup melakukan *scan* QR Code pada surat izin siswa menggunakan kamera HP.
+* **Validasi Anti-Palsu:** Sistem akan menampilkan halaman verifikasi berwarna hijau (VALID) beserta detail jam dan guru penyetuju, atau merah (TIDAK VALID) jika surat dipalsukan.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## 🔄 Skenario Penggunaan (Workflow)
+1. **Siswa** mengajukan form izin via aplikasi.
+2. **Guru** melihat notifikasi/tabel rekap, lalu menekan tombol **Setujui**.
+3. **Siswa** melihat status berubah menjadi hijau dan menekan tombol **Cetak Surat**.
+4. **Siswa** menunjukkan surat PDF (di HP atau dicetak) ke **Satpam**.
+5. **Satpam** melakukan *scan* QR Code untuk memvalidasi keaslian surat sebelum membukakan gerbang.
 
-## Repository Management
+---
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## 🛠️ Teknologi yang Digunakan
+* **Backend:** PHP 8, CodeIgniter 4
+* **Frontend:** Bootstrap 5, FontAwesome, DataTables (jQuery)
+* **Database:** MySQL / MariaDB
+* **Library Tambahan:** TCPDF (Untuk *Generate* Surat PDF), QR Server API.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+---
 
-## Contributing
+## 🚀 Cara Instalasi & Penggunaan Lokal
 
-We welcome contributions from the community.
+Ikuti langkah-langkah berikut untuk menjalankan project ini di komputer / server lokal (XAMPP/Laragon/dll):
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+1. **Clone Repository ini**
+   ```bash
+   git clone [https://github.com/](https://github.com/)[username-github-kamu]/[nama-repo-kamu].git
+   cd [nama-repo-kamu]
+Konfigurasi Database
 
-## Server Requirements
+Buat database baru di MySQL/phpMyAdmin (misal: db_eizin).
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+Import file database yang tersedia di folder database/db_eizin.sql (jika ada).
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Rename file env menjadi .env.
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+Buka file .env, cari pengaturan database, hapus tanda #, dan sesuaikan:
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Cuplikan kode
+database.default.hostname = localhost
+database.default.database = db_eizin
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+Jalankan Aplikasi
+Buka terminal di dalam folder project dan jalankan built-in server CodeIgniter:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Bash
+php spark serve
+Aplikasi bisa diakses melalui browser di: http://localhost:8080
